@@ -7,9 +7,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th @click="sort('name')">Name</th>
-                            <th @click="sort('age')">Age</th>
-                            <th @click="sort('gender')">Gender</th>
+                            <th @click="sort('name')">Name &#8595;</th>
+                            <th @click="sort('age')">Age &#8595;</th>
+                            <th @click="sort('gender')">Gender &#8595;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,8 +24,19 @@
                     </tbody>
                 </table>
 
-                <p>debug: sort: {{ currentSort }}, dir: {{ currentSortDir }}</p>
+                <p style="text-align: center;">
+                    <span>debug: sort: {{ currentSort }}, dir: {{ currentSortDir }}</span>
+                    page: {{ this.page.current }}, length: {{ this.page.length }}
+                </p>
 
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="button-list">
+                    <div class="btn btnPrimary" @click="prevPage"> &#8592; </div>
+                    <div class="btn btnPrimary" @click="nextPage"> &#8594; </div>
+                </div>
             </div>
         </section>
     </div>
@@ -39,7 +50,11 @@ export default {
         return {
             users: [],
             currentSort: 'name',
-            currentSortDir: 'asc'
+            currentSortDir: 'asc',
+            page: {
+                current: 1,
+                length: 4
+            }
         }
     },
     created () {
@@ -65,6 +80,10 @@ export default {
                 if (a[this.currentSort] < b[this.currentSort]) return -1 * mod
                 if (a[this.currentSort] > b[this.currentSort]) return 1 * mod
                 return 0
+            }).filter((row, index) => {
+                let start = (this.page.current-1) * this.page.length
+                let end = this.page.current * this.page.length
+                if (index >= start && index < end) return true
             })
         }
     },
@@ -74,6 +93,13 @@ export default {
                  this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
             }
             this.currentSort = e
+        },
+        // Pagination
+        prevPage () {
+            if (this.page.current > 1) this.page.current-=1
+        },
+        nextPage () {
+            if ((this.page.current * this.page.length) < this.users.length) this.page.current+=1
         }
     }
 }
@@ -85,5 +111,15 @@ export default {
         height: auto;
         border-radius: 50%;
         margin-right: 16px;
+    }
+
+    .button-list {
+        text-align: center;
+        width: 100%;
+
+        .btn {
+            border-radius: 60px;
+            margin: 0 20px;
+        }
     }
 </style>
