@@ -1,4 +1,6 @@
-# vue-cli
+# users CRM (Vue.js 2)
+## Demo:
+https://redbignow.github.io/users-CRM/dist/index.html
 
 ## Project setup
 ```
