@@ -11,7 +11,7 @@ import Users from '@/pages/Users'
 
 // Routering
 export default new Router ({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
             path: '/',
