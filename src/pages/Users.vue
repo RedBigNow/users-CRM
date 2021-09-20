@@ -2,8 +2,6 @@
     <div class="wrapper-content wrapper-content--fixed">
         <section>
             <div class="container">
-                <h1>Users page</h1>
-
                 <table>
                     <thead>
                         <tr>
@@ -26,7 +24,6 @@
 
                 <p style="text-align: center;">
                     <span>debug: sort: {{ currentSort }}, dir: {{ currentSortDir }}</span>
-                    page: {{ this.page.current }}, length: {{ this.page.length }}
                 </p>
 
             </div>
@@ -35,6 +32,7 @@
             <div class="container">
                 <div class="button-list">
                     <div class="btn btnPrimary" @click="prevPage"> &#8592; </div>
+                    <span>{{ this.page.current }} - {{ this.page.length }}</span>
                     <div class="btn btnPrimary" @click="nextPage"> &#8594; </div>
                 </div>
             </div>
@@ -119,6 +117,7 @@ export default {
 
         .btn {
             border-radius: 60px;
+            padding: .8em;
             margin: 0 20px;
         }
     }
